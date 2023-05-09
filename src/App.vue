@@ -12,7 +12,8 @@
         </li>
       </router-link>
       <div id="app-react">react-app</div>
-      <tree-select v-model="value" :data="data" :filterable="true" :lazy="true" :loadNode="loadNode" :multiple="true"></tree-select>
+      <tree-select v-model="value" :data="data" :filterable="true" :multiple="true" :checkStrictly="true" isOnlyLeafCheckbox></tree-select>
+      <!-- <tree-select-h v-model="value" :data="data" :filterable="true" :multiple="false"></tree-select-h> -->
     </nav>
     <router-view/>
   </div>
@@ -22,11 +23,13 @@
 import actions from '@/utils/actions'
 import axios from 'axios'
 import TreeSelect from '@/components/TreeSelect'
+import TreeSelectH from '@/components/TreeSelectH'
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
     TreeSelect
+    // TreeSelectH
   },
   data () {
     return {
@@ -38,23 +41,91 @@ export default {
         },
         {
           id: 2,
-          label: '我是label2',
-          children: [
-            {
-              id: 22,
-              label: '我是label22'
-            }
-          ]
+          label: '我是label2'
         },
         {
           id: 3,
           label: '我是label3'
         }
-      ].concat([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => ({
+      ].concat([{
+        id: 16,
+        label: '我是label16',
+        children: [
+          {
+            id: 17,
+            label: '我是label17',
+            children: [
+              {
+                id: 18,
+                label: '我是label18',
+                children: [
+                  {
+                    id: 19,
+                    label: '我是label19',
+                    children: [
+                      {
+                        id: 20,
+                        label: '我是label20',
+                        children: [
+                          {
+                            id: 21,
+                            label: '我是label21',
+                            children: [
+                              {
+                                id: 22,
+                                label: '我是22'
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }]).concat(
+        [{
+          id: 23,
+          label: '我是label23',
+          children: [
+            {
+              id: 24,
+              label: '我是label24',
+              children: [
+                {
+                  id: 25,
+                  label: '我是label25',
+                  children: [
+                    {
+                      id: 26,
+                      label: '我是label26',
+                      children: [
+                        {
+                          id: 27,
+                          label: '我是label27',
+                          children: [
+                            {
+                              id: 28,
+                              label: '我是28'
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        ]).concat([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => ({
         id: item,
         label: '我是label' + item
       }))),
-      value: '3'
+      value: [9]
     }
   },
   computed: {
